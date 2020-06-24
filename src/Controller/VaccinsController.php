@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Vaccins;
 use App\Form\VaccinsType;
 use App\Repository\VaccinsRepository;
+use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +29,7 @@ class VaccinsController extends AbstractController
     /**
      * @Route("/new", name="vaccins_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Mailer $mailer): Response
     {
         $vaccin = new Vaccins();
         $form = $this->createForm(VaccinsType::class, $vaccin);
@@ -38,6 +39,8 @@ class VaccinsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($vaccin);
             $entityManager->flush();
+
+            $mailer->sendmail('Vaccins à faire', 'jeremy67230@gmail.com', 'rappelVaccin', $form->getData());
 
             return $this->redirectToRoute('vaccins_index');
         }
