@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medocs{% endblock %}
+
+{% block body %}
+    <h1>Medocs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ medoc.id }}</td>
+            </tr>
+            <tr>
+                <th>Posologie</th>
+                <td>{{ medoc.posologie }}</td>
+            </tr>
+            <tr>
+                <th>Symptome</th>
+                <td>{{ medoc.symptome }}</td>
+            </tr>
+            <tr>
+                <th>Effets</th>
+                <td>{{ medoc.effets }}</td>
+            </tr>
+            <tr>
+                <th>Contrindic</th>
+                <td>{{ medoc.contrindic }}</td>
+            </tr>
+            <tr>
+                <th>Dosage</th>
+                <td>{{ medoc.dosage }}</td>
+            </tr>
+            <tr>
+                <th>Conserv</th>
+                <td>{{ medoc.conserv }}</td>
+            </tr>
+            <tr>
+                <th>Forme</th>
+                <td>{{ medoc.forme }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('medocs_index') }}">back to list</a>
+
+    <a href="{{ path('medocs_edit', {'id': medoc.id}) }}">edit</a>
+
+    {{ include('medocs/_delete_form.html.twig') }}
+{% endblock %}
