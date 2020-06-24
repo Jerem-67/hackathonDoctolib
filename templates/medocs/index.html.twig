@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medocs index{% endblock %}
+
+{% block body %}
+    <h1>Medocs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Posologie</th>
+                <th>Symptome</th>
+                <th>Effets</th>
+                <th>Contrindic</th>
+                <th>Dosage</th>
+                <th>Conserv</th>
+                <th>Forme</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medoc in medocs %}
+            <tr>
+                <td>{{ medoc.id }}</td>
+                <td>{{ medoc.posologie }}</td>
+                <td>{{ medoc.symptome }}</td>
+                <td>{{ medoc.effets }}</td>
+                <td>{{ medoc.contrindic }}</td>
+                <td>{{ medoc.dosage }}</td>
+                <td>{{ medoc.conserv }}</td>
+                <td>{{ medoc.forme }}</td>
+                <td>
+                    <a href="{{ path('medocs_show', {'id': medoc.id}) }}">show</a>
+                    <a href="{{ path('medocs_edit', {'id': medoc.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('medocs_new') }}">Create new</a>
+{% endblock %}
