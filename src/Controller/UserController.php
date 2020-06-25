@@ -53,8 +53,11 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        $now = new \DateTime();
+        $age = date_diff($now, $user->getBirthday());
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'age' => $age,
         ]);
     }
 
