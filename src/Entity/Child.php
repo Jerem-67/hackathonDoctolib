@@ -50,6 +50,41 @@ class Child
      */
     private $vaccins;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Tuberculose;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $DTP;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Coqueluche;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Meningites;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $HepatiteB;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $ROR;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $HPV;
+
     public function __construct()
     {
         $this->vaccins = new ArrayCollection();
@@ -142,6 +177,90 @@ class Child
         if ($this->vaccins->contains($vaccin)) {
             $this->vaccins->removeElement($vaccin);
         }
+
+        return $this;
+    }
+
+    public function getTuberculose(): ?\DateTimeInterface
+    {
+        return $this->Tuberculose;
+    }
+
+    public function setTuberculose(?\DateTimeInterface $Tuberculose): self
+    {
+        $this->Tuberculose = $Tuberculose;
+
+        return $this;
+    }
+
+    public function getDTP(): ?\DateTimeInterface
+    {
+        return $this->DTP;
+    }
+
+    public function setDTP(?\DateTimeInterface $DTP): self
+    {
+        $this->DTP = $DTP;
+
+        return $this;
+    }
+
+    public function getCoqueluche(): ?\DateTimeInterface
+    {
+        return $this->Coqueluche;
+    }
+
+    public function setCoqueluche(?\DateTimeInterface $Coqueluche): self
+    {
+        $this->Coqueluche = $Coqueluche;
+
+        return $this;
+    }
+
+    public function getMeningites(): ?\DateTimeInterface
+    {
+        return $this->Meningites;
+    }
+
+    public function setMeningites(?\DateTimeInterface $Meningites): self
+    {
+        $this->Meningites = $Meningites;
+
+        return $this;
+    }
+
+    public function getHepatiteB(): ?\DateTimeInterface
+    {
+        return $this->HepatiteB;
+    }
+
+    public function setHepatiteB(?\DateTimeInterface $HepatiteB): self
+    {
+        $this->HepatiteB = $HepatiteB;
+
+        return $this;
+    }
+
+    public function getROR(): ?\DateTimeInterface
+    {
+        return $this->ROR;
+    }
+
+    public function setROR(?\DateTimeInterface $ROR): self
+    {
+        $this->ROR = $ROR;
+
+        return $this;
+    }
+
+    public function getHPV(): ?\DateTimeInterface
+    {
+        return $this->HPV;
+    }
+
+    public function setHPV(?\DateTimeInterface $HPV): self
+    {
+        $this->HPV = $HPV;
 
         return $this;
     }
