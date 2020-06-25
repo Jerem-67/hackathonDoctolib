@@ -3,39 +3,26 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ user.name }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Birthday</th>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Sex</th>
-                <td>{{ user.sex ? 'Mr' : 'Mrs' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="uk-card uk-card-default uk-width-1-2@m">
+        <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                    <h3 class="uk-card-title uk-margin-remove-bottom">{{ user.sex ? 'Mr' : 'Mrs' }} {{ user.firstName }} {{ user.name }} </h3>
+                    <p class="uk-text-meta uk-margin-remove-top">{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="uk-card-body">
+            <h1>Vaccines</h1>
+            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
+            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
+            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
+            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
+        </div>
+        <div class="uk-card-footer">
+            <a href="{{ path('child_new') }}" class="uk-button uk-button-text">Add child</a>
+        </div>
+    </div>
     <a href="{{ path('user_index') }}">back to list</a>
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>

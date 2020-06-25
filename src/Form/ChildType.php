@@ -23,11 +23,31 @@ class ChildType extends AbstractType
                 'label' => false,
                 'expanded' => true,
                 'choices' => [
-                    'Female' => true,
-                    'Male' => false,
-
+                    'Girl' => true,
+                    'Boy' => false,
                 ]
             ])
+            ->add('tuberculose', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
+            ->add('dtp', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
+            ->add('coqueluche', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
+            ->add('meningites', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
+            ->add('hepatiteB', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
+            ->add('ror', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
+            ->add('hpv', DateType::class, [
+                'required'=> false,
+                'widget' => 'single_text',])
         ;
     }
 
