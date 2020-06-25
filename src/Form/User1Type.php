@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,12 +15,18 @@ class User1Type extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('name')
             ->add('firstName')
-            ->add('birthday')
-            ->add('sex')
+            ->add('birthday', DateType::class, ['widget' => 'single_text',])
+            ->add('sex',ChoiceType::class, [
+                'expanded' => true,
+                'label' => false,
+                'choices' => [
+                    'Mrs' => 0,
+                    'Mr' => 1,
+                ],
+            ])
             ->add('vaccins')
         ;
     }
