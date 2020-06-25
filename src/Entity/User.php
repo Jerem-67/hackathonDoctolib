@@ -68,6 +68,26 @@ class User implements UserInterface
      */
     private $vaccins;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $DTP;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Coqueluche;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Grippe;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Zona;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -253,6 +273,54 @@ class User implements UserInterface
         if ($this->vaccins->contains($vaccin)) {
             $this->vaccins->removeElement($vaccin);
         }
+
+        return $this;
+    }
+
+    public function getDTP(): ?\DateTimeInterface
+    {
+        return $this->DTP;
+    }
+
+    public function setDTP(?\DateTimeInterface $DTP): self
+    {
+        $this->DTP = $DTP;
+
+        return $this;
+    }
+
+    public function getCoqueluche(): ?\DateTimeInterface
+    {
+        return $this->Coqueluche;
+    }
+
+    public function setCoqueluche(?\DateTimeInterface $Coqueluche): self
+    {
+        $this->Coqueluche = $Coqueluche;
+
+        return $this;
+    }
+
+    public function getGrippe(): ?\DateTimeInterface
+    {
+        return $this->Grippe;
+    }
+
+    public function setGrippe(?\DateTimeInterface $Grippe): self
+    {
+        $this->Grippe = $Grippe;
+
+        return $this;
+    }
+
+    public function getZona(): ?\DateTimeInterface
+    {
+        return $this->Zona;
+    }
+
+    public function setZona(?\DateTimeInterface $Zona): self
+    {
+        $this->Zona = $Zona;
 
         return $this;
     }
