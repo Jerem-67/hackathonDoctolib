@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,6 +57,22 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $sex;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Child::class, mappedBy="user")
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Vaccins::class, inversedBy="users")
+     */
+    private $vaccins;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+        $this->vaccins = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -178,6 +196,63 @@ class User implements UserInterface
     public function setSex(string $sex): self
     {
         $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Child[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Child $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Child $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getUser() === $this) {
+                $child->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vaccins[]
+     */
+    public function getVaccins(): Collection
+    {
+        return $this->vaccins;
+    }
+
+    public function addVaccin(Vaccins $vaccin): self
+    {
+        if (!$this->vaccins->contains($vaccin)) {
+            $this->vaccins[] = $vaccin;
+        }
+
+        return $this;
+    }
+
+    public function removeVaccin(Vaccins $vaccin): self
+    {
+        if ($this->vaccins->contains($vaccin)) {
+            $this->vaccins->removeElement($vaccin);
+        }
 
         return $this;
     }
