@@ -40,8 +40,8 @@ class User1Type extends AbstractType
             ->add('zona',DateType::class, [
                 'required'=> false,
                 'widget' => 'single_text',
-            ])
-        ;
+            ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
