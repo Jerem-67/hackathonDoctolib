@@ -23,14 +23,6 @@ class RegistrationFormType extends AbstractType
             ->add('first_name')
             ->add('birthday')
             ->add('birthday')
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Doctor' => 'ROLE_ADMIN',
-                    'Patient' => 'ROLE_USER',
-                ],
-                'multiple' => true,
-                'preferred_choices' => ['Patient'],
-            ])
             ->add('sex', ChoiceType::class, [
                 'choices' => [
                     'Mr' => 'Mr',
