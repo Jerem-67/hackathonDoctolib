@@ -14,10 +14,27 @@
         </div>
         <div class="uk-card-body">
             <h1>Vaccines</h1>
-            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
-            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
-            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
-            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
+            {% if age.y < 18 %}
+                <li>Go to your Doctor</li>
+            {% elseif age.y <= 65%}
+                <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
+                <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
+                <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
+                <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
+                <li>Zona next check : {{ user.zona ? user.zona|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+            {% else %}
+                <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
+                <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
+                <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
+                <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
+                <li>Zona next check : {{ user.zona ? user.zona|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+            {% endif %}
         </div>
         <div class="uk-card-footer">
             <a href="{{ path('child_new') }}" class="uk-button uk-button-text">Add child</a>
