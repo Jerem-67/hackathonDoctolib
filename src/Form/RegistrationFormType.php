@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -21,12 +22,13 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('name')
             ->add('first_name')
-            ->add('birthday')
-            ->add('birthday')
+            ->add('birthday', DateType::class, ['widget' => 'single_text',])
             ->add('sex', ChoiceType::class, [
-                'choices' => [
-                    'Mr' => 'Mr',
-                    'Mrs' => 'Mrs',
+                    'expanded' => true,
+                    'label' => false,
+                    'choices' => [
+                        'Mrs' => 0,
+                        'Mr' => 1,
                     ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
