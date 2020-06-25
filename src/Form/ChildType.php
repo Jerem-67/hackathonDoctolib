@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Child;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\User;
 
 class ChildType extends AbstractType
 {
@@ -16,7 +18,10 @@ class ChildType extends AbstractType
             ->add('first_name')
             ->add('birthday')
             ->add('sex')
-            ->add('user')
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'id',
+            ])
             ->add('vaccins')
         ;
     }
