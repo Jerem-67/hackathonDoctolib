@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @Route("/child")
@@ -28,14 +29,17 @@ class ChildController extends AbstractController
     /**
      * @Route("/new", name="child_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserInterface $user): Response
     {
         $child = new Child();
+        $child->setUser($user);
         $form = $this->createForm(ChildType::class, $child);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($child);
             $entityManager->flush();
 
