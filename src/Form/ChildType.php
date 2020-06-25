@@ -16,7 +16,10 @@ class ChildType extends AbstractType
             ->add('first_name')
             ->add('birthday')
             ->add('sex')
-            ->add('user')
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'id',
+            ])
             ->add('vaccins')
         ;
     }
