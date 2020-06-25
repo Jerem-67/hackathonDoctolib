@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Child;
+use App\Entity\User;
 use App\Form\ChildType;
 use App\Repository\ChildRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @Route("/child")
@@ -27,25 +29,30 @@ class ChildController extends AbstractController
 
     /**
      * @Route("/new", name="child_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param UserInterface $user
+     * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserInterface $user): Response
     {
-        $child = new Child();
-        $form = $this->createForm(ChildType::class, $child);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($child);
-            $entityManager->flush();
+            $child = new Child();
+            $child->setUser($user);
+            $form = $this->createForm(ChildType::class, $child);
+            $form->handleRequest($request);
 
-            return $this->redirectToRoute('child_index');
-        }
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($child);
+                $entityManager->flush();
 
-        return $this->render('child/new.html.twig', [
-            'child' => $child,
-            'form' => $form->createView(),
-        ]);
+                return $this->redirectToRoute('child_index');
+            }
+
+            return $this->render('child/new.html.twig', [
+                'child' => $child,
+                'form' => $form->createView(),
+            ]);
     }
 
     /**
