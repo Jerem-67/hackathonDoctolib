@@ -5,7 +5,6 @@
 {% block body %}
 
     <div class="uk-child-width-1-2@m" uk-grid>
-        <div>
             <div class="uk-card uk-card-default">
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">{{ user.sex ? 'Mr' : 'Mrs' }} {{ user.firstName }} {{ user.name }} </h3>
@@ -17,32 +16,40 @@
                         {% elseif age.y <= 65%}
                             <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
                             <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                             <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
                             <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                             <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
                             <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                             <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
                             <li>Zona next check : {{ user.zona ? user.zona|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                         {% else %}
                             <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
                             <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                             <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
                             <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                             <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
                             <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                            <hr>
                             <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
                             <li>Zona next check : {{ user.zona ? user.zona|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
                         {% endif %}
                     </div>
                 </div>
             </div>
-        </div>
         <div>
             <div class="uk-card uk-card-default">
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">Your Family</h3>
                     {% for child in user.children %}
-                        <li>{{ child.firstname }}'s birthday :  {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</li>
+                        <li>
+                            <a href="{{ path('child_show', {'id': child.id}) }}">{{ child.firstname }}'s birthday :  {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</a>
+                        </li>
                     {% endfor %}
                 </div>
                 <div class="uk-width-expand">
