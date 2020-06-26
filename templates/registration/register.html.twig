@@ -6,9 +6,7 @@
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
+    <h1 class="uk-text-center">Register</h1>
     {{ form_start(registrationForm, {'attr': {'class': 'uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large'}}) }}
         {{ form_row(registrationForm.sex, {'attr':{'placeholder': "Text to translate"},'attr' : {'class': 'uk-text-center' }}) }}
         {{ form_row(registrationForm.name, {'label': 'Name','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
