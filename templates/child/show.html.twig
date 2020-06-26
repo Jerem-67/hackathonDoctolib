@@ -16,53 +16,35 @@
     </div>
     <div class="uk-card-body">
         <h1>Vaccines</h1>
-        {{ dump(age) }}
-        {% if age.y < 1 %}
-            <li>Go to your Mom</li>
-{#        {% elseif age.y <= 65%}#}
-{#            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>#}
-{#            <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
-{#            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>#}
-{#            <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
-{#            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>#}
-{#            <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
-{#            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>#}
-{#            <li>Zona next check : {{ user.zona ? user.zona|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
-{#        {% else %}#}
-{#            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>#}
-{#            <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
-{#            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>#}
-{#            <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
-{#            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>#}
-{#            <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
-{#            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>#}
-{#            <li>Zona next check : {{ user.zona ? user.zona|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
+        {{ dump(child) }}
+        {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}
+        {% if age.y < 18 %}
+            <li>Tuberculose check : {{ child.birthday ? child.birthday|date_modify("+1 month")|date('Y-m-d') : '' }}</li>
+            <hr>
+            <li>DTP First check : {{ child.birthday ? child.birthday|date_modify("+2 month")|date('Y-m-d') : '' }}</li>
+            <li>DTP Second check : {{ child.birthday ? child.birthday|date_modify("+4 month")|date('Y-m-d') : '' }}</li>
+            <li>DTP Third check : {{ child.birthday ? child.birthday|date_modify("+11 month")|date('Y-m-d') : '' }}</li>
+            <hr>
+            <li>Coqueluche First check : {{ child.birthday ? child.birthday|date_modify("+2 month")|date('Y-m-d') : '' }}</li>
+            <li>Coqueluche Second check : {{ child.birthday ? child.birthday|date_modify("+4 month")|date('Y-m-d') : '' }}</li>
+            <li>Coqueluche Third check : {{ child.birthday ? child.birthday|date_modify("+11 month")|date('Y-m-d') : '' }}</li>
+            <hr>
+            <li>HepatiteB First check : {{ child.birthday ? child.birthday|date_modify("+2 month")|date('Y-m-d') : '' }}</li>
+            <li>HepatiteB Second check : {{ child.birthday ? child.birthday|date_modify("+4 month")|date('Y-m-d') : '' }}</li>
+            <li>HepatiteB Third check : {{ child.birthday ? child.birthday|date_modify("+11 month")|date('Y-m-d') : '' }}</li>
+            <hr>
+            <li>RoR First check : {{ child.birthday ? child.birthday|date_modify("+12 month")|date('Y-m-d') : '' }}</li>
+            <li>RoR Second check : {{ child.birthday ? child.birthday|date_modify("+18 month")|date('Y-m-d') : '' }}</li>
+            <hr>
+            <li>Meningites First check : {{ child.birthday ? child.birthday|date_modify("+5 month")|date('Y-m-d') : '' }}</li>
+            <li>Meningites Second check : {{ child.birthday ? child.birthday|date_modify("+12 month")|date('Y-m-d') : '' }}</li>
+            <hr>
+            {% if child.sex ? child.sex == true %}
+                <li>HPV  check : {{ child.birthday ? child.birthday|date_modify("+12 years")|date('Y-m-d') : '' }}</li>
+            {% endif %}
         {% endif %}
+    </div>
 </div>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ child.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ child.name }}</td>
-            </tr>
-            <tr>
-                <th>First_name</th>
-                <td>{{ child.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Birthday</th>
-                <td>{{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Sex</th>
-                <td>{{ child.sex ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
     <a href="{{ path('child_index') }}">back to list</a>
 
