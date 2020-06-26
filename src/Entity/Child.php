@@ -85,9 +85,15 @@ class Child
      */
     private $HPV;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="child")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->vaccins = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -261,6 +267,34 @@ class Child
     public function setHPV(?\DateTimeInterface $HPV): self
     {
         $this->HPV = $HPV;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeChild($this);
+        }
 
         return $this;
     }

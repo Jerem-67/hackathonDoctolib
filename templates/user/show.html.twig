@@ -3,43 +3,60 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <div class="uk-card uk-card-default uk-width-1-2@m">
-        <div class="uk-card-header">
-            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                <div class="uk-width-expand">
-                    <h3 class="uk-card-title uk-margin-remove-bottom">{{ user.sex ? 'Mr' : 'Mrs' }} {{ user.firstName }} {{ user.name }} </h3>
-                    <p class="uk-text-meta uk-margin-remove-top">{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</p>
+
+    <div class="uk-child-width-1-2@m" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">{{ user.sex ? 'Mr' : 'Mrs' }} {{ user.firstName }} {{ user.name }} </h3>
+                    <p class="uk-text-meta uk-margin-remove-top">Birthday : {{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</p>
+                    <div class="uk-card-body">
+                        <h1>Vaccines</h1>
+                        {% if age.y < 18 %}
+                            <li>Go to your Doctor</li>
+                        {% elseif age.y <= 65%}
+                            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
+                            <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
+                            <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
+                            <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
+                            <li>Zona next check : {{ user.zona ? user.zona|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
+                        {% else %}
+                            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
+                            <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
+                            <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
+                            <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
+                            <li>Zona next check : {{ user.zona ? user.zona|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="uk-card-body">
-            <h1>Vaccines</h1>
-            {% if age.y < 18 %}
-                <li>Go to your Doctor</li>
-            {% elseif age.y <= 65%}
-                <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
-                <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
-                <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
-                <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
-                <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
-                <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
-                <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
-                <li>Zona next check : {{ user.zona ? user.zona|date_modify("+5 years")|date('Y-m-d') : '' }}</li>
-            {% else %}
-                <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>
-                <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
-                <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>
-                <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
-                <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>
-                <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
-                <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>
-                <li>Zona next check : {{ user.zona ? user.zona|date_modify("+1 years")|date('Y-m-d') : '' }}</li>
-            {% endif %}
-        </div>
-        <div class="uk-card-footer">
-            <a href="{{ path('child_new') }}" class="uk-button uk-button-text">Add child</a>
+        <div>
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">Your Family</h3>
+                    {% for child in user.children %}
+                        <li>{{ child.firstname }}'s birthday :  {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</li>
+                    {% endfor %}
+                </div>
+                <div class="uk-width-expand">
+                    <div class="uk-card-footer">
+                        <a href="{{ path('child_new') }}" class="uk-button uk-button-text">Add child</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
     <a href="{{ path('user_index') }}">back to list</a>
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>

@@ -88,10 +88,16 @@ class User implements UserInterface
      */
     private $Zona;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=child::class, inversedBy="users")
+     */
+    private $child;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->vaccins = new ArrayCollection();
+        $this->child = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -323,5 +329,13 @@ class User implements UserInterface
         $this->Zona = $Zona;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|child[]
+     */
+    public function getChild(): Collection
+    {
+        return $this->child;
     }
 }
