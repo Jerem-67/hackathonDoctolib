@@ -8,7 +8,7 @@
             <div class="uk-grid-small uk-flex-middle" uk-grid>
                 <div class="uk-width-expand">
                     <h3 class="uk-card-title uk-margin-remove-bottom">{{ user.sex ? 'Mr' : 'Mrs' }} {{ user.firstName }} {{ user.name }} </h3>
-                    <p class="uk-text-meta uk-margin-remove-top">{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</p>
+                    <p class="uk-text-meta uk-margin-remove-top">Birthday : {{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</p>
                 </div>
             </div>
         </div>
