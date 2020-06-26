@@ -57,6 +57,8 @@ class ChildController extends AbstractController
 
     /**
      * @Route("/{id}", name="child_show", methods={"GET"})
+     * @param Child $child
+     * @return Response
      */
     public function show(Child $child): Response
     {
