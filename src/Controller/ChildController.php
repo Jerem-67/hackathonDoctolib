@@ -46,7 +46,7 @@ class ChildController extends AbstractController
                 $entityManager->persist($child);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('child_index');
+                return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
             }
 
             return $this->render('child/new.html.twig', [
@@ -74,7 +74,7 @@ class ChildController extends AbstractController
     /**
      * @Route("/{id}/edit", name="child_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Child $child): Response
+    public function edit(Request $request, Child $child, UserInterface $user): Response
     {
         $form = $this->createForm(ChildType::class, $child);
         $form->handleRequest($request);
@@ -82,7 +82,7 @@ class ChildController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('child_index');
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
         }
 
         return $this->render('child/edit.html.twig', [
