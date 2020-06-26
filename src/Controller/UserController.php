@@ -52,17 +52,15 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}", name="user_show", methods={"GET","POST"})
      * @param User $user
-     * @param Child $child
      * @return Response
      */
-    public function show(User $user, Child $child): Response
+    public function show(User $user): Response
     {
         $now = new \DateTime();
         $age = date_diff($now, $user->getBirthday());
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'age' => $age,
-            'child' => $child,
         ]);
     }
 
