@@ -1,21 +1,15 @@
 <section class="uk-container-small uk-align-center">
-    {{ form_start(form, {'attr': {'class': 'uk-margin uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large'}}) }}
+    {{ form_start(form, {'attr': {'class': 'uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large'}}) }}
         {{ form_row(form.sex, {'attr':{'placeholder': "Text to translate"},'attr' : {'class': 'uk-text-center' }}) }}
-        <section id="edit-user" class="uk-flex uk-flex-center">
-            <div class="uk-margin">
                 {{ form_row(form.name, {'label': 'Name','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.firstName, {'label': 'First Name','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.email, {'label': 'Email','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.password, {'label': 'Password','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.birthday, {'label': 'Birthday','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class': 'uk-input' }}) }}
-            </div>
-            <div class="uk-margin">
                 {{ form_row(form.dtp, {'label': 'dtp','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.coqueluche, {'label': 'coqueluche','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.grippe, {'label': 'grippe','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
                 {{ form_row(form.zona, {'label': 'zona','label_attr': {'class': 'uk-margin uk-form-label'},'attr' : {'class':'uk-input'}}) }}
-            </div>
-        </section>
-    <button class="uk-button uk-button-primary uk-margin uk-width-1-1">{{ button_label|default('Save') }}</button>
+                <button class="uk-button uk-button-primary uk-margin uk-width-1-1">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
 </section>
