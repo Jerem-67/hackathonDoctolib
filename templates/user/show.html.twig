@@ -47,6 +47,38 @@
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">Your Family</h3>
                     {% for child in user.children %}
+                    <ul uk-accordion>
+                        <li class="uk-open">
+                            <a class="uk-accordion-title" href="{{ path('child_show', {'id': child.id}) }}">{{ child.firstname }}'s birthday :  {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}">Adulte</a>
+                            <div class="uk-accordion-content">
+                                <h1>Vaccines</h1>
+                                {% if child.age.y < 18 %}
+                        <li>Tuberculose check : {{ child.birthday ? child.birthday|date_modify("+1 month")|date('Y-m-d') : '' }}</li>
+                        <hr>
+                        <li>DTP First check : {{ child.birthday ? child.birthday|date_modify("+2 month")|date('Y-m-d') : '' }}</li>
+                        <li>DTP Second check : {{ child.birthday ? child.birthday|date_modify("+4 month")|date('Y-m-d') : '' }}</li>
+                        <li>DTP Third check : {{ child.birthday ? child.birthday|date_modify("+11 month")|date('Y-m-d') : '' }}</li>
+                        <hr>
+                        <li>Coqueluche First check : {{ child.birthday ? child.birthday|date_modify("+2 month")|date('Y-m-d') : '' }}</li>
+                        <li>Coqueluche Second check : {{ child.birthday ? child.birthday|date_modify("+4 month")|date('Y-m-d') : '' }}</li>
+                        <li>Coqueluche Third check : {{ child.birthday ? child.birthday|date_modify("+11 month")|date('Y-m-d') : '' }}</li>
+                        <hr>
+                        <li>HepatiteB First check : {{ child.birthday ? child.birthday|date_modify("+2 month")|date('Y-m-d') : '' }}</li>
+                        <li>HepatiteB Second check : {{ child.birthday ? child.birthday|date_modify("+4 month")|date('Y-m-d') : '' }}</li>
+                        <li>HepatiteB Third check : {{ child.birthday ? child.birthday|date_modify("+11 month")|date('Y-m-d') : '' }}</li>
+                        <hr>
+                        <li>RoR First check : {{ child.birthday ? child.birthday|date_modify("+12 month")|date('Y-m-d') : '' }}</li>
+                        <li>RoR Second check : {{ child.birthday ? child.birthday|date_modify("+18 month")|date('Y-m-d') : '' }}</li>
+                        <hr>
+                        <li>Meningites First check : {{ child.birthday ? child.birthday|date_modify("+5 month")|date('Y-m-d') : '' }}</li>
+                        <li>Meningites Second check : {{ child.birthday ? child.birthday|date_modify("+12 month")|date('Y-m-d') : '' }}</li>
+                        <hr>
+                        {% if child.sex ? child.sex == true %}
+                            <li>HPV  check : {{ child.birthday ? child.birthday|date_modify("+12 years")|date('Y-m-d') : '' }}</li>
+                        {% endif %}
+                        {% endif %}
+
+                        </li>
                         <li>
                             <a href="{{ path('child_show', {'id': child.id}) }}">{{ child.firstname }}'s birthday :  {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</a>
                         </li>
