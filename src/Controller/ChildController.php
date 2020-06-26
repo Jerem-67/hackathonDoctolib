@@ -60,9 +60,13 @@ class ChildController extends AbstractController
      */
     public function show(Child $child): Response
     {
+        $now = new \DateTime();
+        $age = date_diff($now, $child->getBirthday());
         return $this->render('child/show.html.twig', [
             'child' => $child,
+            'age' => $age,
         ]);
+
     }
 
     /**

@@ -5,6 +5,40 @@
 {% block body %}
     <h1>Child</h1>
 
+<div class="uk-card uk-card-default uk-width-1-2@m">
+    <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-width-expand">
+                <h3 class="uk-card-title uk-margin-remove-bottom">{{ child.sex ? 'Mr' : 'Mrs' }} {{ child.firstName }} {{ child.name }} </h3>
+                <p class="uk-text-meta uk-margin-remove-top">{{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-card-body">
+        <h1>Vaccines</h1>
+        {{ dump(age) }}
+        {% if age.y < 1 %}
+            <li>Go to your Mom</li>
+{#        {% elseif age.y <= 65%}#}
+{#            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>#}
+{#            <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
+{#            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>#}
+{#            <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
+{#            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>#}
+{#            <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
+{#            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>#}
+{#            <li>Zona next check : {{ user.zona ? user.zona|date_modify("+5 years")|date('Y-m-d') : '' }}</li>#}
+{#        {% else %}#}
+{#            <li>DTP last check : {{ user.dtp ? user.dtp|date('Y-m-d') : '' }}</li>#}
+{#            <li>DTP next check : {{ user.dtp ? user.dtp|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
+{#            <li>Coqueluche last check : {{ user.coqueluche ? user.coqueluche|date('Y-m-d') : '' }}</li>#}
+{#            <li>Coqueluche next check : {{ user.coqueluche ? user.coqueluche|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
+{#            <li>Grippe last check : {{ user.grippe ? user.grippe|date('Y-m-d') : '' }}</li>#}
+{#            <li>Grippe next check : {{ user.grippe ? user.grippe|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
+{#            <li>Zona last check : {{ user.zona ? user.zona|date('Y-m-d') : '' }}</li>#}
+{#            <li>Zona next check : {{ user.zona ? user.zona|date_modify("+1 years")|date('Y-m-d') : '' }}</li>#}
+        {% endif %}
+</div>
     <table class="table">
         <tbody>
             <tr>
