@@ -42,8 +42,7 @@
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">Your Family</h3>
                     {% for child in user.children %}
-                        <li>{{ child.name }} {{ child.firstname }} {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</li>
-                        <li>is {{ child.birthday ? child.birthday|age.y }} old</li>
+                        <li>{{ child.firstname }}'s birthday :  {{ child.birthday ? child.birthday|date('Y-m-d') : '' }}</li>
                     {% endfor %}
                 </div>
                 <div class="uk-width-expand">
